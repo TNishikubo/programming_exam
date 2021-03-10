@@ -1,6 +1,5 @@
 import datetime
 import csv
-import numpy as np
 import pandas as pd
 import ipaddress
 
@@ -87,9 +86,9 @@ for index,dt,ping in zip( df.index,df["datetime"],df["ping"]):
                     #同一のサブネット内のサーバーがすべて止まったときカウント
                     if(same_subnet==crash_subnet and same_subnet==crash_subnet_time ):
                         allstop+=1
-                         
-                    if(allstop>=WAIT+1):
                         
+                    #allstop がWAIT+1回カウントされた場合サブネットスイッチの故障と判定する   
+                    if(allstop>=WAIT+1):
                         sncr_count+=1
                         if(sncr_count==1):
                             print(str(d_time)+"_ Subnet switch"+str(subnet)+" Crash")
